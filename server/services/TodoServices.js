@@ -12,12 +12,10 @@ class TodosService {
     }
   }
 
-  async get(id, page = 1, perPage = 1) {
+  async get(id) {
     try {
       const searchParams = id ? { id } : {};
-      const todos = await Todo.find(searchParams)
-        .skip(perPage * (page - 1))
-        .limit(5);
+      const todos = await Todo.find(searchParams);
       // skip пропускает  skip*page = сколько страниц пропускаем   limit 5 записей на страницу
       return todos.length === 0 ? null : todos;
     } catch (err) {
