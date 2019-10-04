@@ -1,31 +1,32 @@
 import axios from "axios";
-import {
-  getTodosRequest,
-  getTodosSuccess,
-  getTodosError,
-  addTodoRequest,
-  addTodoSuccess,
-  addTodoError
-} from "./todoActions";
+import * as todoActions from "./todoActions";
 
 axios.defaults.baseURL = "http://localhost:5678";
 
 export const getTodos = () => dispatch => {
-  dispatch(getTodosRequest());
+  dispatch(todoActions.getTodosRequest());
 
   return axios
     .get("/todo")
-    .then(({ data }) => dispatch(getTodosSuccess(data.todos)))
-    .catch(err => dispatch(getTodosError(err)));
+    .then(({ data }) => dispatch(todoActions.getTodosSuccess(data.todos)))
+    .catch(err => dispatch(todoActions.getTodosError(err)));
 };
 
 export const addTodo = credentials => dispatch => {
-  dispatch(addTodoRequest());
+  dispatch(todoActions.addTodoRequest());
   const todo = { task: credentials };
   return axios
     .post("/todo", todo)
-    .then(({ data }) => dispatch(addTodoSuccess(data.todo)))
-    .catch(err => dispatch(addTodoError(err)));
+    .then(({ data }) => dispatch(todoActions.addTodoSuccess(data.todo)))
+    .catch(err => dispatch(todoActions.addTodoError(err)));
 };
 
-export const deleteTodo = credentials => dispatch => {};
+export const deleteTodo = credentials => dispatch => {
+  dispatch(todoActions.deleteTodoRequest());
+  const todoId = credentials;
+
+  return axios
+    .delete(`/todo/${todoId}`)
+    .then(({ data }) => dispatch(todoActions.deleteTodoSuccess(data._id)))
+    .catch(err => dispatch(todoActions.deleteTodoError(err)));
+};
