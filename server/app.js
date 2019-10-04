@@ -10,11 +10,16 @@ setupDB();
 
 const app = express();
 
+app;
 app
+  .use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  })
   .use(morgan("dev"))
   .use(bodyParser.urlencoded({ extended: false }))
   .use(bodyParser.json())
-  .use("/to-dos", todoRoutes)
+  .use("/todo", todoRoutes)
   .use((err, req, res, next) => {
     res.status(500).json(err);
   });
