@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import TodoForm from "./TodoForm/TodoForm";
 import TodoList from "./TodoList/TodoList";
+// import styles from "./Todo.module.css"
 
 class Todo extends Component {
   state = { isAdding: false, todoInput: "", todos: [] };
@@ -40,6 +41,7 @@ class Todo extends Component {
         </button>
         {isAdding && (
           <TodoForm
+            // className = {styles.todoForm}
             isAdding={isAdding}
             onSubmit={this.handleTodoSubmit}
             onInputChange={this.handleTodoInputChange}

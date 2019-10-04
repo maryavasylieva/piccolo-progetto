@@ -1,0 +1,9 @@
+.todoSection {
+   max-width: 1200px;
+}
+
+.todoList {
+   display: flex;
+   justify-content: center;
+   list-style-type: none;
+}
