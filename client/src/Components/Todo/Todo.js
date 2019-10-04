@@ -1,18 +1,16 @@
 import React, { Component } from "react";
-import axios from "axios";
 import TodoForm from "./TodoForm/TodoForm";
 import TodoList from "./TodoList/TodoList";
 
 class Todo extends Component {
-  state = { isAdding: false, todoInput: "", todos: [] };
+  state = { isAdding: false, todoInput: "" };
 
   componentDidMount() {
-    axios
-      .get("http://localhost:5678/todo")
-      .then(({ data }) => this.setState({ todos: data.todos }));
+    this.props.getTodos();
   }
 
   handleTodoAddClick = () => this.setState({ isAdding: true });
+  handleCancelEdit = () => this.setState({ isAdding: false });
 
   handleTodoInputChange = ({ target: { value } }) =>
     this.setState({ todoInput: value });
@@ -22,31 +20,32 @@ class Todo extends Component {
 
     if (this.state.todoInput.trim().length === 0) return;
 
-    axios
-      .post("http://localhost:5678/todo", { task: this.state.todoInput })
-      .then(({ data }) =>
-        this.setState(state => ({ todos: [...state.todos, data.todo] }))
-      );
+    this.props.addTodo(this.state.todoInput);
 
     this.setState({ todoInput: "", isAdding: false });
   };
 
   render() {
-    const { isAdding, todoInput, todos } = this.state;
+    const { isAdding, todoInput } = this.state;
     return (
       <section>
         <button type="button" onClick={this.handleTodoAddClick}>
           Add todo
         </button>
+        <TodoList />
         {isAdding && (
           <TodoForm
-            isAdding={isAdding}
             onSubmit={this.handleTodoSubmit}
+            onCancel={this.handleCancelEdit}
             onInputChange={this.handleTodoInputChange}
             value={todoInput}
           />
         )}
-        <TodoList todos={todos} />
+        {!isAdding && (
+          <button type="button" onClick={this.handleTodoAddClick}>
+            Add todo
+          </button>
+        )}
       </section>
     );
   }
