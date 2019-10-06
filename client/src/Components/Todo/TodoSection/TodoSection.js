@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import TodoForm from './TodoForm/TodoForm';
-import TodoList from './TodoList/TodoList';
-import AddTaskBTN from './AddTaskBTN/AddTaskBTN';
+import TodoForm from '../TodoForm/TodoForm';
+import TodoList from '../TodoList/TodoList';
+import AddTaskBTN from '../AddTaskBTN/AddTaskBTN';
 
 class Todo extends Component {
   static defaultProps = {
-    title: 'todos',
+    title: '',
   };
 
   state = { isAdding: false, todoInput: '' };
-
-  componentDidMount() {
-    this.props.getTodos();
-  }
 
   handleTodoAddClick = () => this.setState({ isAdding: true });
 
@@ -33,15 +29,18 @@ class Todo extends Component {
 
   render() {
     const { isAdding, todoInput } = this.state;
-    const { title } = this.props;
+    const { title, todos } = this.props;
     return (
       <section>
         <h3>{title}</h3>
         <AddTaskBTN handleTodoAddClick={this.handleTodoAddClick} />
-        <TodoList
-          isAdding={isAdding}
-          handleTodoAddClick={this.handleTodoAddClick}
-        />
+        {todos.length && (
+          <TodoList
+            isAdding={isAdding}
+            handleTodoAddClick={this.handleTodoAddClick}
+            todos={todos}
+          />
+        )}
         {isAdding ? (
           <TodoForm
             onSubmit={this.handleTodoSubmit}

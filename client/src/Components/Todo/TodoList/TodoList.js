@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import TodoItem from './TodoItem';
-import { todos } from '../../../redux/todo/todoSelectors';
 import css from './TodoList.module.css';
 
 const TodoList = ({ todos }) => (
@@ -23,8 +21,4 @@ TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object),
 };
 
-const mSTP = state => ({
-  todos: todos(state),
-});
-
-export default connect(mSTP)(TodoList);
+export default TodoList;

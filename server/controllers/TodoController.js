@@ -52,6 +52,25 @@ class TodosController {
     }
   }
 
+  async patch(req, res) {
+    try {
+      const id = req.params.id;
+      let todo = await TodoServices.getOneByID(id);
+      const todoToPatch = req.body;
+      console.log("todo :", todo);
+      console.log("todoToPatch :", todoToPatch);
+      const test = { todos: [...todo.todos, ...todoToPatch.todos] };
+      console.log("test :", test);
+      todo = await TodoServices.update(id, test);
+      res.json(todo);
+      if (!todo) {
+        return res.status(404).json({ message: "Todo list wasnt found" });
+      }
+    } catch (err) {
+      throw new Error(`Controller error while patching todo: ${err}`);
+    }
+  }
+
   async delete(req, res) {
     try {
       const id = req.params.id;

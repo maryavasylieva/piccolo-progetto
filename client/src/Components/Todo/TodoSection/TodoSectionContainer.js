@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
-import { getTodos, addTodo } from '../../redux/todo/todoOperations';
-import Todo from './Todo';
+import { addTodo } from '../../../redux/todo/todoOperations';
+import Todo from './TodoSection';
 
 const mDTP = {
-  getTodos,
   addTodo,
 };
 
