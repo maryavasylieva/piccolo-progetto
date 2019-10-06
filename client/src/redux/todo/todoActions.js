@@ -8,6 +8,12 @@ export const Actions_Types = {
   DELETE_TODO_REQUEST: 'DELETE_TODO_REQUEST',
   DELETE_TODO_SUCCESS: 'DELETE_TODO_SUCCESS',
   DELETE_TODO_ERROR: 'DELETE_TODO_ERROR',
+  ADD_TASK_ITEM_REQUEST: 'ADD_TASK_ITEM_REQUEST',
+  ADD_TASK_ITEM_SUCEESS: 'ADD_TASK_ITEM_SUCEESS',
+  ADD_TASK_ITEM_ERROR: 'ADD_TASK_ITEM_ERROR',
+  DELETE_TASK_LIST_REQUEST: 'DELETE_TASK_LIST_REQUEST',
+  DELETE_TASK_LIST_SUCCESS: 'DELETE_TASK_LIST_SUCCESS',
+  DELETE_TASK_LIST_ERROR: 'DELETE_TASK_LIST_ERROR',
 };
 
 // get todos
@@ -60,6 +66,42 @@ export const deleteTodoSuccess = id => ({
 
 export const deleteTodoError = err => ({
   type: Actions_Types.DELETE_TODO_ERROR,
+  payload: { err },
+});
+//
+
+// add task list
+
+//
+export const addTaskItemRequest = () => ({
+  type: Actions_Types.ADD_TASK_ITEM_REQUEST,
+});
+
+export const addTaskItemSuccess = taskItem => ({
+  type: Actions_Types.ADD_TASK_ITEM_SUCEESS,
+  payload: { taskItem },
+});
+
+export const addTaskItemError = err => ({
+  type: Actions_Types.ADD_TASK_ITEM_ERROR,
+  payload: { err },
+});
+//
+
+// delete task list
+
+//
+export const deleteTaskListRequest = () => ({
+  type: Actions_Types.DELETE_TASK_LIST_REQUEST,
+});
+
+export const deleteTaskListSuccess = id => ({
+  type: Actions_Types.DELETE_TASK_LIST_SUCCESS,
+  payload: { id },
+});
+
+export const deleteTaskListError = err => ({
+  type: Actions_Types.DELETE_TASK_LIST_ERROR,
   payload: { err },
 });
 //

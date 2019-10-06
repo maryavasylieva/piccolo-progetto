@@ -7,7 +7,7 @@ const TodoForm = ({ onSubmit, onInputChange, value, onCancel }) => (
     <button type="button" onClick={onCancel}>
       Cancel
     </button>
-    <button type="submit">submit todo</button>
+    <button type="submit">Submit</button>
   </form>
 );
 

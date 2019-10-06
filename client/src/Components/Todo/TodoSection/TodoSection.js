@@ -22,19 +22,22 @@ class Todo extends Component {
 
     if (this.state.todoInput.trim().length === 0) return;
 
-    this.props.addTodo(this.state.todoInput);
+    this.props.addTodo({ task: this.state.todoInput, id: this.props._id });
 
     this.setState({ todoInput: '', isAdding: false });
   };
 
   render() {
     const { isAdding, todoInput } = this.state;
-    const { title, todos } = this.props;
+    const { title, todos, _id: id } = this.props;
     return (
       <section>
         <h3>{title}</h3>
+        <button type="button" onClick={() => this.props.deleteTaskList(id)}>
+          Delete task list
+        </button>
         <AddTaskBTN handleTodoAddClick={this.handleTodoAddClick} />
-        {todos.length && (
+        {todos.length > 0 && (
           <TodoList
             isAdding={isAdding}
             handleTodoAddClick={this.handleTodoAddClick}
