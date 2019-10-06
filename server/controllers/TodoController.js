@@ -40,12 +40,18 @@ class TodosController {
       const id = req.params.id;
       const todoToUpdate = req.body;
       let todo = await TodoServices.getOneByID(id);
-
+      console.log("todo :", todo);
+      console.log("todoToUpdate :", todoToUpdate);
+      const updatedTodo = {
+        title: todo.title,
+        todos: [...todo.todos, todoToUpdate]
+      };
+      console.log("updatedTodo :", updatedTodo);
       if (!todo) {
         return res.status(404).json({ message: "Todo list wasnt fount" });
       }
 
-      todo = await TodoServices.update(id, todoToUpdate);
+      todo = await TodoServices.update(id, updatedTodo);
       res.json(todo);
     } catch (err) {
       throw new Error(`Controllers error while updating todo: ${err}`);
