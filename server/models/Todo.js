@@ -9,7 +9,12 @@ const mongoose = require("mongoose");
 //
 
 const Todo = mongoose.Schema({
-  task: String
+  title: String,
+  todos: [
+    {
+      task: String
+    }
+  ]
 });
 
 module.exports = mongoose.model("Todo", Todo);

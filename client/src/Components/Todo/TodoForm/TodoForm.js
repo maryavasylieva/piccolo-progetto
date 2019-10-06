@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const TodoForm = ({ onSubmit, onInputChange, value, onCancel }) => (
   <form action="GET" onSubmit={onSubmit}>
@@ -7,7 +7,7 @@ const TodoForm = ({ onSubmit, onInputChange, value, onCancel }) => (
     <button type="button" onClick={onCancel}>
       Cancel
     </button>
-    <button type="submit">submit todo</button>
+    <button type="submit">Submit</button>
   </form>
 );
 
@@ -15,8 +15,8 @@ TodoForm.defaultProps = {
   isAdding: false,
   onSubmit: () => null,
   onInputChange: () => null,
-  value: "",
-  onCancel: () => null
+  value: '',
+  onCancel: () => null,
 };
 
 TodoForm.propTypes = {
@@ -24,7 +24,7 @@ TodoForm.propTypes = {
   onSubmit: PropTypes.func,
   onInputChange: PropTypes.func,
   value: PropTypes.string,
-  onCancel: PropTypes.func
+  onCancel: PropTypes.func,
 };
 
 export default TodoForm;

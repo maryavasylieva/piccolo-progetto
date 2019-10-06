@@ -26,11 +26,8 @@ class TodosService {
   async getOneByID(id, page = 1, perPage = 1) {
     try {
       const searchParams = id ? { _id: id } : {};
-      const todos = await Todo.find(searchParams)
-        .skip(perPage * (page - 1))
-        .limit(5);
-      // skip пропускает  skip*page = сколько страниц пропускаем   limit 5 записей на страницу
-      return todos.length === 0 ? null : todos;
+      const todos = await Todo.find(searchParams);
+      return todos.length === 0 ? null : todos[0];
     } catch (err) {
       throw new Error(`Services error while getting todo: ${err}`);
     }
@@ -41,6 +38,14 @@ class TodosService {
       return await Todo.findOneAndUpdate({ _id: id }, todo, { new: true });
     } catch (err) {
       throw new Error(`Services error while updating todo: ${err}`);
+    }
+  }
+
+  async patch(id, todo) {
+    try {
+      return await Todo.findOneAndUpdate({ _id: id }, todo, { new: true });
+    } catch (err) {
+      throw new Error(`Services error while patching todo: ${err}`);
     }
   }
 
