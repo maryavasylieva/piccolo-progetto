@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import { Actions_Types } from "./todoActions";
+import { combineReducers } from 'redux';
+import { Actions_Types } from './todoActions';
 
 const tasks = (state = [], { type, payload }) => {
   switch (type) {

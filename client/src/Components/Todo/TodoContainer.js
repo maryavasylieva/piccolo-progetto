@@ -1,13 +1,13 @@
-import { connect } from "react-redux";
-import { getTodos, addTodo } from "../../redux/todo/todoOperations";
-import Todo from "./Todo";
+import { connect } from 'react-redux';
+import { getTodos, addTodo } from '../../redux/todo/todoOperations';
+import Todo from './Todo';
 
 const mDTP = {
   getTodos,
-  addTodo
+  addTodo,
 };
 
 export default connect(
   null,
-  mDTP
+  mDTP,
 )(Todo);

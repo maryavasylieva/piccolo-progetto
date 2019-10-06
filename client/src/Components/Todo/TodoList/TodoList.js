@@ -1,13 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import TodoItem from "./TodoItem";
-import { connect } from "react-redux";
-import { todos } from "../../../redux/todo/todoSelectors";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import TodoItem from './TodoItem';
+import { todos } from '../../../redux/todo/todoSelectors';
+import css from './TodoList.module.css';
 
 const TodoList = ({ todos }) => (
-  <ul>
+  <ul className={css.list}>
     {todos.map(todo => (
-      <li key={todo._id}>
+      <li key={todo._id} className={css.item}>
         <TodoItem {...todo} />
       </li>
     ))}
@@ -15,15 +16,15 @@ const TodoList = ({ todos }) => (
 );
 
 TodoList.defaultProps = {
-  todos: []
+  todos: [],
 };
 
 TodoList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.object)
+  todos: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mSTP = state => ({
-  todos: todos(state)
+  todos: todos(state),
 });
 
 export default connect(mSTP)(TodoList);
