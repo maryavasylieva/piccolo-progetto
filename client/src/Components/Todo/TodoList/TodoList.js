@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 import css from './TodoList.module.css';
 
-const TodoList = ({ todos }) => (
+const TodoList = ({ todos, listID }) => (
   <ul className={css.list}>
     {todos.map(todo => (
       <li key={todo._id} className={css.item}>
-        <TodoItem {...todo} />
+        <TodoItem listID={listID} {...todo} />
       </li>
     ))}
   </ul>

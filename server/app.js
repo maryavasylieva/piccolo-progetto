@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
 dotenv.config();
-const { todoRoutes } = require("./routes/routes");
+const { todoRoutes, taskRoutes } = require("./routes/routes");
 const setupDB = require("./helpers/setupDB.js");
 
 setupDB();
@@ -17,6 +17,7 @@ app
   .use(bodyParser.json())
   .use(cors())
   .use("/todo", todoRoutes)
+  .use("/task", taskRoutes)
   .use((err, req, res, next) => {
     res.status(500).json(err);
   });

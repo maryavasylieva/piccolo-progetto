@@ -24,10 +24,10 @@ export const addTaskList = credentials => dispatch => {
 export const addTodo = credentials => dispatch => {
   dispatch(todoActions.addTodoRequest());
   const { task, id } = credentials;
-  const todo = { todos: { task } };
+  const todo = { task };
   return axios
-    .patch(`/todo/${id}`, todo)
-    .then(({ data }) => dispatch(todoActions.addTodoSuccess(data.todo)))
+    .put(`/todo/${id}`, todo)
+    .then(({ data }) => dispatch(todoActions.addTodoSuccess(data)))
     .catch(err => dispatch(todoActions.addTodoError(err)));
 };
 
@@ -40,12 +40,10 @@ export const deleteTaskList = credentials => dispatch => {
     .catch(err => dispatch(todoActions.deleteTaskListError(err)));
 };
 
-export const deleteTodo = credentials => dispatch => {
+export const deleteTodo = ({ listID, taskID }) => dispatch => {
   dispatch(todoActions.deleteTodoRequest());
-  const todoId = credentials;
-
   return axios
-    .delete(`/todo/${todoId}`)
-    .then(({ data }) => dispatch(todoActions.deleteTodoSuccess(data._id)))
+    .put(`/task/${listID}?task=${taskID}`)
+    .then(({ data }) => dispatch(todoActions.deleteTodoSuccess(data)))
     .catch(err => dispatch(todoActions.deleteTodoError(err)));
 };
