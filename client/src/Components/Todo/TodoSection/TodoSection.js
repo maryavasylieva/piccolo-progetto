@@ -23,7 +23,6 @@ class Todo extends Component {
     if (this.state.todoInput.trim().length === 0) return;
 
     this.props.addTodo({ task: this.state.todoInput, id: this.props._id });
-
     this.setState({ todoInput: '', isAdding: false });
   };
 
@@ -36,7 +35,6 @@ class Todo extends Component {
         <button type="button" onClick={() => this.props.deleteTaskList(id)}>
           Delete task list
         </button>
-        <AddTaskBTN handleTodoAddClick={this.handleTodoAddClick} />
         {todos.length > 0 && (
           <TodoList
             isAdding={isAdding}
