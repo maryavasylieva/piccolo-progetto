@@ -42,6 +42,7 @@ class Todo extends Component {
             isAdding={isAdding}
             handleTodoAddClick={this.handleTodoAddClick}
             todos={todos}
+            listID={id}
           />
         )}
         {isAdding ? (

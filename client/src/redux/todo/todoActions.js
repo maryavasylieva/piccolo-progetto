@@ -59,9 +59,9 @@ export const deleteTodoRequest = () => ({
   type: Actions_Types.DELETE_TODO_REQUEST,
 });
 
-export const deleteTodoSuccess = id => ({
+export const deleteTodoSuccess = todo => ({
   type: Actions_Types.DELETE_TODO_SUCCESS,
-  payload: { id },
+  payload: { todo },
 });
 
 export const deleteTodoError = err => ({

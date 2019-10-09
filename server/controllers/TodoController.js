@@ -26,7 +26,7 @@ class TodosController {
       const todo = await TodoServices.getOneByID(id);
 
       if (!todo) {
-        return res.status(404).json({ message: "Todo list not fount=d" });
+        return res.status(404).json({ message: "Todo list not found" });
       }
 
       res.json({ data: todo });
