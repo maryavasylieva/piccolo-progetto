@@ -4,7 +4,6 @@ class TaskController {
   async deleteTask(req, res, next) {
     try {
       const id = req.params.id;
-      console.log("taskID :", req.query.task);
       let todo = await TodoServices.getOneByID(id);
       todo.todos = todo.todos.filter(task => task.id !== req.query.task);
       if (!todo) {

@@ -11,13 +11,9 @@ const tasks = (state = [], { type, payload }) => {
 
     case Actions_Types.ADD_TODO_SUCCESS:
     case Actions_Types.DELETE_TODO_SUCCESS:
-      return state.map(el => {
-        if (el._id === payload.todo._id) {
-          el.todos = payload.todo.todos;
-        }
-
-        return el;
-      });
+      return state.map(el =>
+        el._id === payload.todo._id ? { ...el, todos: payload.todo.todos } : el,
+      );
 
     case Actions_Types.DELETE_TASK_LIST_SUCCESS:
       return state.filter(todo => todo._id !== payload.id);
