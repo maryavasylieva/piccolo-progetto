@@ -47,3 +47,9 @@ export const deleteTodo = ({ listID, taskID }) => dispatch => {
     .then(({ data }) => dispatch(todoActions.deleteTodoSuccess(data)))
     .catch(err => dispatch(todoActions.deleteTodoError(err)));
 };
+
+export const sortTaskItem = credentials => dispatch => {
+  dispatch(todoActions.sortTaskItemsRequest());
+  const { startID, endID, startIndex, EndIndex, draggableId } = credentials;
+  console.log(credentials);
+};

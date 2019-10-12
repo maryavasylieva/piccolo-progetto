@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { DragDropContext } from 'react-beautiful-dnd';
 import TodoSectionContainer from '../TodoSection/TodoSectionContainer';
 import css from './Todos.module.css';
 import TodoForm from '../TodoForm/TodoForm';
@@ -37,34 +38,50 @@ class Todos extends Component {
     this.setState({ isAdding: false, inputValue: '' });
   };
 
+  onDragEnd = result => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) return;
+
+    this.props.sortTaskItem({
+      startID: source.droppableId,
+      endID: destination.droppableId,
+      startIndex: source.index,
+      EndIndex: destination.index,
+      draggableId,
+    });
+  };
+
   render() {
     const { isAdding, inputValue } = this.state;
     const { todos } = this.props;
     return (
-      todos.length > 0 && (
-        <ul className={css.list}>
-          {todos.map(todo => (
-            <li key={todo._id} className={css.item}>
-              <TodoSectionContainer {...todo} />
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <div>
+          <ul className={css.list}>
+            {todos.map(todo => (
+              <li key={todo._id} className={css.item}>
+                <TodoSectionContainer {...todo} />
+              </li>
+            ))}
+            <li key="addNext" className={css.item}>
+              {isAdding ? (
+                <TodoForm
+                  list
+                  onSubmit={this.handleFormSubmit}
+                  value={inputValue}
+                  onCancel={this.handleCancelClick}
+                  onInputChange={this.handleInputChange}
+                />
+              ) : (
+                <button type="button" onClick={this.handleAddClick}>
+                  Add new task list
+                </button>
+              )}
             </li>
-          ))}
-          <li key="addNext" className={css.item}>
-            {isAdding ? (
-              <TodoForm
-                list
-                onSubmit={this.handleFormSubmit}
-                value={inputValue}
-                onCancel={this.handleCancelClick}
-                onInputChange={this.handleInputChange}
-              />
-            ) : (
-              <button type="button" onClick={this.handleAddClick}>
-                Add new task list
-              </button>
-            )}
-          </li>
-        </ul>
-      )
+          </ul>
+        </div>
+      </DragDropContext>
     );
   }
 }

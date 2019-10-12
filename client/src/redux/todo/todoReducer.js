@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { Actions_Types } from './todoActions';
+import Actions_Types from './todoActionTypes';
 
 const tasks = (state = [], { type, payload }) => {
   switch (type) {
@@ -15,6 +15,8 @@ const tasks = (state = [], { type, payload }) => {
         el._id === payload.todo._id ? { ...el, todos: payload.todo.todos } : el,
       );
 
+    case Actions_Types.SORT_TASK_ITEM_SUCCESS:
+
     case Actions_Types.DELETE_TASK_LIST_SUCCESS:
       return state.filter(todo => todo._id !== payload.id);
     default:
@@ -28,12 +30,14 @@ const error = (state = null, { type, payload }) => {
     case Actions_Types.ADD_TASK_ITEM_ERROR:
     case Actions_Types.DELETE_TASK_LIST_ERROR:
     case Actions_Types.DELETE_TODO_ERROR:
+    case Actions_Types.SORT_TASK_ITEM_ERROR:
       return payload.err;
 
     case Actions_Types.GET_TODOS_SUCCESS:
     case Actions_Types.ADD_TASK_ITEM_SUCEESS:
     case Actions_Types.DELETE_TASK_LIST_SUCCESS:
     case Actions_Types.DELETE_TODO_SUCCESS:
+    case Actions_Types.SORT_TASK_ITEM_SUCCESS:
       return null;
 
     default:
