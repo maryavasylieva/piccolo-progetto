@@ -14,6 +14,7 @@ class Root extends Component {
   render() {
     return (
       <main>
+        <h1>Пожалуйста роби</h1>
         <TodosContainer />
       </main>
     );
