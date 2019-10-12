@@ -5,9 +5,9 @@ import css from './TodoList.module.css';
 
 const TodoList = ({ todos, listID }) => (
   <ul className={css.list}>
-    {todos.map(todo => (
+    {todos.map((todo, index) => (
       <li key={todo._id} className={css.item}>
-        <TodoItem listID={listID} {...todo} />
+        <TodoItem listID={listID} {...todo} index={index} />
       </li>
     ))}
   </ul>

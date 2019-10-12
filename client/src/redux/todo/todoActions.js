@@ -1,20 +1,4 @@
-export const Actions_Types = {
-  GET_TODOS_REQUEST: 'GET_TODOS_REQUEST',
-  GET_TODOS_SUCCESS: 'GET_TODOS_SUCCESS',
-  GET_TODOS_ERROR: 'GET_TODOS_ERROR',
-  ADD_TODO_REQUEST: 'ADD_TODO_REQUEST',
-  ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
-  ADD_TODO_ERROR: 'ADD_TODO_ERROR',
-  DELETE_TODO_REQUEST: 'DELETE_TODO_REQUEST',
-  DELETE_TODO_SUCCESS: 'DELETE_TODO_SUCCESS',
-  DELETE_TODO_ERROR: 'DELETE_TODO_ERROR',
-  ADD_TASK_ITEM_REQUEST: 'ADD_TASK_ITEM_REQUEST',
-  ADD_TASK_ITEM_SUCEESS: 'ADD_TASK_ITEM_SUCEESS',
-  ADD_TASK_ITEM_ERROR: 'ADD_TASK_ITEM_ERROR',
-  DELETE_TASK_LIST_REQUEST: 'DELETE_TASK_LIST_REQUEST',
-  DELETE_TASK_LIST_SUCCESS: 'DELETE_TASK_LIST_SUCCESS',
-  DELETE_TASK_LIST_ERROR: 'DELETE_TASK_LIST_ERROR',
-};
+import Actions_Types from './todoActionTypes';
 
 // get todos
 
@@ -70,7 +54,7 @@ export const deleteTodoError = err => ({
 });
 //
 
-// add task list
+// add task item
 
 //
 export const addTaskItemRequest = () => ({
@@ -102,6 +86,24 @@ export const deleteTaskListSuccess = id => ({
 
 export const deleteTaskListError = err => ({
   type: Actions_Types.DELETE_TASK_LIST_ERROR,
+  payload: { err },
+});
+//
+
+// sort task items
+
+//
+export const sortTaskItemsRequest = () => ({
+  type: Actions_Types.SORT_TASK_ITEM_REQUEST,
+});
+
+export const sortTaskItemsSuccess = response => ({
+  type: Actions_Types.SORT_TASK_ITEM_SUCCESS,
+  payload: { response },
+});
+
+export const sortTaskItemsError = err => ({
+  type: Actions_Types.SORT_TASK_ITEM_ERROR,
   payload: { err },
 });
 //
