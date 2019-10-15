@@ -97,12 +97,12 @@ export const sortTaskItemsRequest = () => ({
   type: Actions_Types.SORT_TASK_ITEM_REQUEST,
 });
 
-export const sortTaskItemsSuccess = response => ({
+export const sortTaskItemSuccess = todo => ({
   type: Actions_Types.SORT_TASK_ITEM_SUCCESS,
-  payload: { response },
+  payload: { todo },
 });
 
-export const sortTaskItemsError = err => ({
+export const sortTaskItemError = err => ({
   type: Actions_Types.SORT_TASK_ITEM_ERROR,
   payload: { err },
 });

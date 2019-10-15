@@ -4,7 +4,7 @@ import Actions_Types from './todoActionTypes';
 const tasks = (state = [], { type, payload }) => {
   switch (type) {
     case Actions_Types.GET_TODOS_SUCCESS:
-      return payload.todos;
+      return payload.todos === null ? [] : payload.todos;
 
     case Actions_Types.ADD_TASK_ITEM_SUCEESS:
       return [...state, payload.taskItem];
@@ -16,6 +16,11 @@ const tasks = (state = [], { type, payload }) => {
       );
 
     case Actions_Types.SORT_TASK_ITEM_SUCCESS:
+      if (payload.todo.length) return payload.todo;
+
+      return state.map(el =>
+        el._id === payload.todo._id ? { ...el, todos: payload.todo.todos } : el,
+      );
 
     case Actions_Types.DELETE_TASK_LIST_SUCCESS:
       return state.filter(todo => todo._id !== payload.id);

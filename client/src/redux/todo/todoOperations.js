@@ -1,7 +1,8 @@
 import axios from 'axios';
 import * as todoActions from './todoActions';
 
-axios.defaults.baseURL = 'http://localhost:5678';
+axios.defaults.baseURL = 'https://rom4ik-ka4ek.herokuapp.com/';
+// axios.defaults.baseURL = 'http://localhost:5678/';
 
 export const getTodos = () => dispatch => {
   dispatch(todoActions.getTodosRequest());
@@ -50,6 +51,18 @@ export const deleteTodo = ({ listID, taskID }) => dispatch => {
 
 export const sortTaskItem = credentials => dispatch => {
   dispatch(todoActions.sortTaskItemsRequest());
-  const { startID, endID, startIndex, EndIndex, draggableId } = credentials;
-  console.log(credentials);
+  const {
+    startID,
+    endID,
+    startIndex,
+    EndIndex,
+    draggableId,
+    type,
+  } = credentials;
+  return axios
+    .put(
+      `/task/sortsame/${startID}?endid=${endID}&startindex=${startIndex}&endindex=${EndIndex}&item=${draggableId}&type=${type}`,
+    )
+    .then(({ data }) => dispatch(todoActions.sortTaskItemSuccess(data)))
+    .catch(err => dispatch(todoActions.sortTaskItemError(err)));
 };
